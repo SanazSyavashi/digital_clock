@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: linear-gradient(140deg, yellow, orange, red);
+            font-size: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="digitalClock">
+            <p id="clock"></p>
+
+        </div>
+    </div>
+    <script>
+        let dayOfWeek = ["sun", "mon", "tue", "wen", "frid", "sat"];
+        let clock = document.querySelector("#clock");
+        let digitalClock = () => {
+            let today = new Date();
+            let day = today.getDay();
+            let dayName = dayOfWeek[day];
+            let hour = today.getHours();
+            hour = (hour > 12) ? hour - 12 : hour;
+            let meridiemm = meridiem(hour);
+            let min = today.getMinutes();
+            let sec = today.getSeconds();
+            let time = `${dayName} : ${hour}: ${min} : ${sec}  ${meridiemm}`;
+            clock.innerHTML = time;
+        }
+        let meridiem = hour => {
+            if (hour > 12) {
+                return "pm";
+            } else if (hour < 12 && hour > 0) {
+                return "am";
+            } else if (hour == 12) {
+                return "Noon"
+            } else {
+                return "midNight"
+            }
+        }
+        setInterval(digitalClock, 1000);
+    </script>
+</body>
+
+</html>
